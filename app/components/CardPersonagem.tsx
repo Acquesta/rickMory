@@ -12,12 +12,12 @@ function CardPersonagem({ nome, imagem }: CardProps) {
 
     return ( 
         <div    
-            className="hover:scale-110 transition-all duration-300"
+            className="hover:scale-110 transition-all"
             onMouseEnter={() => setShowMouse(true)}
             onMouseLeave={() => setShowMouse(false)}
         >
-            <div className="bg-black rounded-t-lg">
-                <h3 className={`w-full h-auto text-white ${showMouse ? 'block' : 'hidden'} text-center`}>{nome}</h3>
+            <div className={`${showMouse ? 'block' : 'hidden'} absolute -bottom-1 w-full py-2 transition-all bg-gradient-to-t from-black to-100% rounded-b-xl`}>
+                <h3 className={`w-full h-auto text-white text-center`}>{nome}</h3>
             </div>
             <img 
                 className="min-w-[150px] rounded-lg cursor-pointer" 

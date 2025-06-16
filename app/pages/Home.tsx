@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CardPersonagem from "../components/CardPersonagem";
 
 export default function HomeInicial() {
@@ -7,6 +7,8 @@ export default function HomeInicial() {
     const [data, setData] = useState({
         results: []
     })
+
+    const scrollPersonagensRef = useRef<HTMLUListElement>(null);
 
     useEffect(() => {
         axios.get('https://rickandmortyapi.com/api/character')
@@ -17,10 +19,22 @@ export default function HomeInicial() {
         .catch(error => console.error(error));
     }, [])
 
+    function rodaPersonagens(lado : String){
+        if (scrollPersonagensRef.current) {
+            scrollPersonagensRef.current.animate({
+                scrollLeft: scrollPersonagensRef.current.scrollLeft += lado == 'direita' ?  +window.innerWidth * 0.7 : -window.innerWidth * 0.7
+            }, {
+                duration: 1000,
+                easing: 'ease-in-out'
+            });
+            
+          }
+    }
+
     return (
         <div className="bg-slate-950 h-screen">
             <h1 className="text-white text-4xl text-center py-5">Personagens</h1>
-            <ul className="flex gap-5 mx-8 p-2 overflow-x-hidden overflow-y-hidden">
+            <ul ref={scrollPersonagensRef} className="flex gap-5 mx-8 p-2 overflow-x-hidden overflow-y-hidden">
                 {
                 data ? 
                   data.results.map((personagem : any) => (
@@ -31,6 +45,10 @@ export default function HomeInicial() {
                     />
                   ))  : ''
                 }
+                <div className="absolute">
+                    <button onClick={() => rodaPersonagens('direita')}> direita </button>
+                    <button onClick={() => rodaPersonagens('esquerda')}> esquerda </button>
+                </div>
             </ul>
         </div>
     );
