@@ -1,4 +1,3 @@
-import { url } from "inspector";
 import { useState } from "react";
 
 interface CardProps {

@@ -10,8 +10,6 @@ export default function Personagens() {
 
     const [atualiza, setAtualiza] = useState(false)
 
-    const scrollPersonagensRef = useRef<HTMLUListElement>(null);
-
     useEffect(() => {
         axios.get(`https://rickandmortyapi.com/api/character?page=${page}`)
         .then(response => {
@@ -25,8 +23,7 @@ export default function Personagens() {
         <div className="bg-slate-950">
             <h1 className="text-white text-4xl text-center py-5">Personagens</h1>
             <div className="flex items-center px-5"> 
-                {/* <button onClick={() => rodaPersonagens('esquerda')} className="cursor-pointer"> <IoIosArrowBack color="white" size={25}/> </button> */}
-                <ul ref={scrollPersonagensRef} className="flex flex-wrap justify-center gap-5 p-2 mx-auto">
+                <ul className="flex flex-wrap justify-center gap-5 p-2 mx-auto">
                     { 
                         data.map((page) => (
                             page.map((personagem : any) => (
@@ -39,7 +36,6 @@ export default function Personagens() {
                         ))
                     }
                 </ul>
-                {/* <button onClick={() => rodaPersonagens('direita')} className="rotate-180 cursor-pointer"> <IoIosArrowBack color="white" size={25}/> </button> */}
             </div>
             <div className="flex justify-center gap-5">
                 {

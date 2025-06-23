@@ -5,6 +5,7 @@ import Hotbar from "./components/Hotbar";
 import HomeInicial from "./pages/Home";
 import { useEffect, useState } from "react";
 import Personagens from "./pages/Personagens";
+import Personagem from "./pages/Personagem";
 
 export default function Home() {
 
@@ -23,6 +24,7 @@ export default function Home() {
           <Routes>
             <Route path="/" element={<HomeInicial/>}/>
             <Route path="/personagens" element={<Personagens/>}/>
+            <Route path="/personagem/:id" element={<Personagem/>}/>
           </Routes>
         </BrowserRouter>
       ) : <h2 className="text-center">Carregando...</h2>
